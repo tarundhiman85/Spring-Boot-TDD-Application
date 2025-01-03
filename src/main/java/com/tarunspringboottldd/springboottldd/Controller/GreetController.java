@@ -10,6 +10,6 @@ public class GreetController {
 
         @RequestMapping("/hello/{name}")
         public String sayHello(@PathVariable String name) {
-            return "Hello, Welcome to Spring Boot";
+            return "Hello, " + name + " Welcome to Spring Boot";
         }
 }
