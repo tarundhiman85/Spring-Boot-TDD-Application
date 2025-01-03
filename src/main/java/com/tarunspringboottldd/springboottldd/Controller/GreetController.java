@@ -10,6 +10,9 @@ public class GreetController {
 
         @RequestMapping("/hello/{name}")
         public String sayHello(@PathVariable String name) {
+            if (name == null || name.trim().isEmpty()) {
+                throw new IllegalArgumentException("Name cannot be empty");
+            }
             return "Hello, " + name + " Welcome to Spring Boot";
         }
 }
