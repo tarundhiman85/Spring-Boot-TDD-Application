@@ -1,5 +1,7 @@
 package com.tarunspringboottldd.springboottldd;
 
+import com.tarunspringboottldd.springboottldd.Models.Greeting;
+import com.tarunspringboottldd.springboottldd.Repository.GreetingRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
