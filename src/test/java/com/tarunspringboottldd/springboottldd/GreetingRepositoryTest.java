@@ -1,5 +1,6 @@
 package com.tarunspringboottldd.springboottldd;
 
+import com.tarunspringboottldd.springboottldd.Constants.MessageConstants;
 import com.tarunspringboottldd.springboottldd.Models.Greeting;
 import com.tarunspringboottldd.springboottldd.Repository.GreetingRepository;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ public class GreetingRepositoryTest {
     public void testSaveAndRetrieveGreeting() {
         // Arrange
         Greeting greeting = new Greeting();
-        greeting.setMessage("Hello, Database!");
+        greeting.setMessage(MessageConstants.HELLO_DATABASE);
 
         // Act
         Greeting savedGreeting = greetingRepository.save(greeting);
@@ -27,7 +28,7 @@ public class GreetingRepositoryTest {
 
         // Assert
         assertNotNull(retrievedGreeting);
-        assertEquals("Hello, Database!", retrievedGreeting.getMessage());
+        assertEquals(MessageConstants.HELLO_DATABASE, retrievedGreeting.getMessage());
     }
 }
 
