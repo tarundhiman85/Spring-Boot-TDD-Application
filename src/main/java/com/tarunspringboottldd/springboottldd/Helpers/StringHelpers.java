@@ -21,21 +21,14 @@ public class StringHelpers {
         }
 
         String[] parts = numbers.split(delimiter);
-        int sum = 0;
-        List<String> negatives = new ArrayList<>();
-        for (String part : parts) {
-            int num = Integer.parseInt(part);
-            if (num < 0) {
-                negatives.add(part);
-            }
-            sum += num;
-        }
-
+        List<String> negatives = findNegatives(parts);
         if (!negatives.isEmpty()) {
             throw new IllegalArgumentException("Negatives not allowed: " + String.join(", ", negatives));
         }
-        return sum;
+
+        return Arrays.stream(parts).mapToInt(Integer::parseInt).sum();
     }
+
 
     private String extractDelimiter(String numbers) {
         if (numbers.startsWith("//")) {
@@ -43,6 +36,17 @@ public class StringHelpers {
             return numbers.substring(2, delimiterIndex);
         }
         return "[,\n]";
+    }
+
+    private List<String> findNegatives(String[] parts) {
+        List<String> negatives = new ArrayList<>();
+        for (String part : parts) {
+            int num = Integer.parseInt(part);
+            if (num < 0) {
+                negatives.add(part);
+            }
+        }
+        return negatives;
     }
 
 
