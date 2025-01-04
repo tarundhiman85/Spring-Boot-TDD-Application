@@ -17,4 +17,9 @@ public class StringHelpersTest {
         StringHelpers calculator = new StringHelpers();
         assertEquals(5, calculator.Add("5"));
     }
+    @Test
+    public void testAdd_TwoNumbers_ShouldReturnTheirSum() {
+        StringHelpers calculator = new StringHelpers();
+        assertEquals(3, calculator.Add("1,2"));
+    }
 }
