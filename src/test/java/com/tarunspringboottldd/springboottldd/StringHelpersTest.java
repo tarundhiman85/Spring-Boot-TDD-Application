@@ -12,4 +12,9 @@ public class StringHelpersTest {
         StringHelpers calculator = new StringHelpers();
         assertEquals(0, calculator.Add(MessageConstants.EMPTY_STRING));
     }
+    @Test
+    public void testAdd_SingleNumber_ShouldReturnThatNumber() {
+        StringHelpers calculator = new StringHelpers();
+        assertEquals(5, calculator.Add("5"));
+    }
 }
