@@ -54,5 +54,9 @@ public class StringHelpersTest {
         StringHelpers calculator = new StringHelpers();
         assertEquals(6, calculator.Add("//[***]\n1***2***3"));
     }
-
+    @Test
+    public void testAddMultipleDelimitersShouldReturnSum() {
+        StringHelpers calculator = new StringHelpers();
+        assertEquals(6, calculator.Add("//[*][%]\n1*2%3"));
+    }
 }
