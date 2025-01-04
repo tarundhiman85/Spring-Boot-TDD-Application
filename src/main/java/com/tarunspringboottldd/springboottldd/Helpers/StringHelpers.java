@@ -4,6 +4,7 @@ import com.tarunspringboottldd.springboottldd.Constants.MessageConstants;
 import java.util.*;
 
 public class StringHelpers {
+
     public void validateName(String name) {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException(MessageConstants.EMPTY_NAME_ERROR);
@@ -23,7 +24,11 @@ public class StringHelpers {
         String[] parts = numbers.split(delimiter);
         List<String> negatives = findNegatives(parts);
         if (!negatives.isEmpty()) {
-            throw new IllegalArgumentException("Negatives not allowed: " + String.join(", ", negatives));
+            String message = String.format(
+                    MessageConstants.NEGATIVES_NOT_ALLOWED_FORMAT,
+                    String.join(", ", negatives)
+            );
+            throw new IllegalArgumentException(message);
         }
 
         return Arrays.stream(parts)
@@ -51,6 +56,5 @@ public class StringHelpers {
         }
         return negatives;
     }
-
 
 }
