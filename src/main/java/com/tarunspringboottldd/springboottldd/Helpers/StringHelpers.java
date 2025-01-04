@@ -26,7 +26,10 @@ public class StringHelpers {
             throw new IllegalArgumentException("Negatives not allowed: " + String.join(", ", negatives));
         }
 
-        return Arrays.stream(parts).mapToInt(Integer::parseInt).sum();
+        return Arrays.stream(parts)
+                .mapToInt(Integer::parseInt)
+                .filter(num -> num <= 1000)
+                .sum();
     }
 
 
