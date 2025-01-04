@@ -27,5 +27,10 @@ public class StringHelpersTest {
         StringHelpers calculator = new StringHelpers();
         assertEquals(10, calculator.Add("1,2,3,4"));
     }
+    @Test
+    public void testAdd_NewLinesAndCommas_ShouldReturnSum() {
+        StringHelpers calculator = new StringHelpers();
+        assertEquals(6, calculator.Add("1\n2,3"));
+    }
 
 }
