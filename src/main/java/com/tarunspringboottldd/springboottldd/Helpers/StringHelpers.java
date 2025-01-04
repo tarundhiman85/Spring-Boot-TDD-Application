@@ -12,6 +12,6 @@ public class StringHelpers {
         if (numbers.isEmpty()) {
             return 0;
         }
-        return 1;
+        return Integer.parseInt(numbers);
     }
 }
