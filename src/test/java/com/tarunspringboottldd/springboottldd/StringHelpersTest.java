@@ -22,4 +22,10 @@ public class StringHelpersTest {
         StringHelpers calculator = new StringHelpers();
         assertEquals(3, calculator.Add("1,2"));
     }
+    @Test
+    public void testAddUnknownAmountOfNumbersShouldReturnTheirSum() {
+        StringHelpers calculator = new StringHelpers();
+        assertEquals(10, calculator.Add("1,2,3,4"));
+    }
+
 }
