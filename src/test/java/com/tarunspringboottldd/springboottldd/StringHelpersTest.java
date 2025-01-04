@@ -4,6 +4,7 @@ import com.tarunspringboottldd.springboottldd.Constants.MessageConstants;
 import com.tarunspringboottldd.springboottldd.Helpers.StringHelpers;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StringHelpersTest {
@@ -36,6 +37,12 @@ public class StringHelpersTest {
     public void testAddCustomDelimiterShouldReturnSum() {
         StringHelpers calculator = new StringHelpers();
         assertEquals(3, calculator.Add("//;\n1;2"));
+    }
+    @Test
+    public void testAddNegativeNumbersShouldThrowException() {
+        StringHelpers calculator = new StringHelpers();
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> calculator.Add("1,-2,3,-4"));
+        assertEquals("Negatives not allowed: -2, -4", exception.getMessage());
     }
 
 }
