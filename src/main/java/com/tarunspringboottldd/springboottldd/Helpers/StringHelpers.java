@@ -3,6 +3,7 @@ package com.tarunspringboottldd.springboottldd.Helpers;
 import com.tarunspringboottldd.springboottldd.Constants.MessageConstants;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class StringHelpers {
 
@@ -42,14 +43,20 @@ public class StringHelpers {
     private String extractDelimiter(String numbers) {
         if (numbers.startsWith("//[")) {
             int delimiterEnd = numbers.indexOf("]\n");
-            String rawDelimiter = numbers.substring(3, delimiterEnd);
-            return Pattern.quote(rawDelimiter); // Escape special characters
+            String delimiterSection = numbers.substring(2, delimiterEnd + 1); // Extract everything inside `//[...]`
+
+            // Split multiple delimiters and escape them using Pattern.quote
+            String[] delimiters = delimiterSection.split("]\\[");
+            return Arrays.stream(delimiters)
+                    .map(delimiter -> delimiter.replace("[", "").replace("]", "")) // Remove enclosing brackets
+                    .map(Pattern::quote) // Escape special regex characters
+                    .collect(Collectors.joining("|")); // Combine with OR (`|`)
         } else if (numbers.startsWith("//")) {
             int delimiterIndex = numbers.indexOf("\n");
             String rawDelimiter = numbers.substring(2, delimiterIndex);
-            return Pattern.quote(rawDelimiter); // Escape special characters
+            return Pattern.quote(rawDelimiter); // Single delimiter case
         }
-        return "[,\n]";
+        return "[,\n]"; // Default delimiters: comma and newline
     }
 
     private List<String> findNegatives(String[] parts) {
