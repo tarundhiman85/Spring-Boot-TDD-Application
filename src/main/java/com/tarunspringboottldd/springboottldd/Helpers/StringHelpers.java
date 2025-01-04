@@ -8,4 +8,7 @@ public class StringHelpers {
             throw new IllegalArgumentException(MessageConstants.EMPTY_NAME_ERROR);
         }
     }
+    public int Add(String numbers) {
+        return 1;
+    }
 }
