@@ -2,6 +2,7 @@ package com.tarunspringboottldd.springboottldd.Helpers;
 
 import com.tarunspringboottldd.springboottldd.Constants.MessageConstants;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class StringHelpers {
 
@@ -39,9 +40,14 @@ public class StringHelpers {
 
 
     private String extractDelimiter(String numbers) {
-        if (numbers.startsWith("//")) {
+        if (numbers.startsWith("//[")) {
+            int delimiterEnd = numbers.indexOf("]\n");
+            String rawDelimiter = numbers.substring(3, delimiterEnd);
+            return Pattern.quote(rawDelimiter); // Escape special characters
+        } else if (numbers.startsWith("//")) {
             int delimiterIndex = numbers.indexOf("\n");
-            return numbers.substring(2, delimiterIndex);
+            String rawDelimiter = numbers.substring(2, delimiterIndex);
+            return Pattern.quote(rawDelimiter); // Escape special characters
         }
         return "[,\n]";
     }
