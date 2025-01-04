@@ -33,7 +33,7 @@ public class StringHelpersTest {
         assertEquals(6, calculator.Add("1\n2,3"));
     }
     @Test
-    public void testAdd_CustomDelimiter_ShouldReturnSum() {
+    public void testAddCustomDelimiterShouldReturnSum() {
         StringHelpers calculator = new StringHelpers();
         assertEquals(3, calculator.Add("//;\n1;2"));
     }

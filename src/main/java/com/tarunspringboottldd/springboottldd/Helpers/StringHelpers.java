@@ -8,16 +8,15 @@ public class StringHelpers {
             throw new IllegalArgumentException(MessageConstants.EMPTY_NAME_ERROR);
         }
     }
+
     public int Add(String numbers) {
         if (numbers.isEmpty()) {
             return 0;
         }
 
-        String delimiter = "[,\n]";
+        String delimiter = extractDelimiter(numbers);
         if (numbers.startsWith("//")) {
-            int delimiterIndex = numbers.indexOf("\n");
-            delimiter = numbers.substring(2, delimiterIndex);
-            numbers = numbers.substring(delimiterIndex + 1);
+            numbers = numbers.substring(numbers.indexOf("\n") + 1);
         }
 
         String[] parts = numbers.split(delimiter);
@@ -27,5 +26,14 @@ public class StringHelpers {
         }
         return sum;
     }
+
+    private String extractDelimiter(String numbers) {
+        if (numbers.startsWith("//")) {
+            int delimiterIndex = numbers.indexOf("\n");
+            return numbers.substring(2, delimiterIndex);
+        }
+        return "[,\n]";
+    }
+
 
 }
