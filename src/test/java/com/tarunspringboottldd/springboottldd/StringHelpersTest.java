@@ -11,7 +11,7 @@ public class StringHelpersTest {
     @Test
     public void testAddEmptyStringShouldReturnZero() {
         StringHelpers calculator = new StringHelpers();
-        assertEquals(1, calculator.Add(MessageConstants.EMPTY_STRING));
+        assertEquals(0, calculator.Add(MessageConstants.EMPTY_STRING));
     }
     @Test
     public void testAddSingleNumberShouldReturnThatNumber() {
