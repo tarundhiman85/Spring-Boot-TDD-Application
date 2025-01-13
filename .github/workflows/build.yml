@@ -54,8 +54,42 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/spring-boot-tdd-app:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/spring-boot-tdd-app:${{ github.run_id }}
 
-      # Step 8: Remove Old Images
-      - name: Remove Old Docker Images
+      # Step 8: Run the container with a unique name
+      - name: Run Container
+        run: |
+          docker run -d \
+            --name spring-boot-tdd-app-${{ github.run_id }} \
+            -p 8080:8080 \
+            ${{ secrets.DOCKER_USERNAME }}/spring-boot-tdd-app:${{ github.run_id }}
+
+      # Step 9: Test the running container using curl
+      # This uses a simple retry loop to wait up to ~30s total for the container to start
+      - name: Test Container
+        run: |
+          echo "Testing container on http://localhost:8080/api/todos/hello..."
+          for i in {1..6}; do
+            if curl -f http://localhost:8080/api/todos/hello; then
+              echo "✅ Container responded successfully!"
+              exit 0
+            fi
+            echo "Container not ready yet. Waiting 5s before retry..."
+            sleep 5
+          done
+          echo "❌ Failed to connect to the container after multiple attempts."
+          exit 1
+
+      # Step 10: Remove Old Containers (optional)
+      - name: Remove Old Containers
+        run: |
+          # Remove any container whose name starts with "spring-boot-tdd-app-"
+          # but doesn't match the current run ID.
+          docker ps -a --filter "name=spring-boot-tdd-app-" --format "{{.ID}} {{.Names}}" \
+            | grep -v "spring-boot-tdd-app-${{ github.run_id }}" \
+            | awk '{print $1}' \
+            | xargs -r docker rm -f
+
+      # Step 11: Remove local Docker images (optional)
+      - name: Remove Local Docker Images
         run: |
           docker rmi spring-boot-tdd-app:latest || true
           docker image prune -f
