@@ -66,21 +66,9 @@ jobs:
         run: |
           echo "Currently running containers:"
           docker ps
-
-      # Step 10: Remove the container
-      - name: Remove the Container
-        run: |
           echo "Removing the newly created container..."
-          docker rm -f spring-boot-tdd-app-${{ github.run_id }}
-          echo "Removed the container spring-boot-tdd-app-${{ github.run_id }}."
 
-      # Step 11: Confirm the container is removed
-      - name: Confirm No Container
-        run: |
-          echo "Listing containers again to confirm removal..."
-          docker ps -a
-
-      # Step 12: Remove old containers (if you have multiple runs)
+      # Step 10: Remove old containers (if you have multiple runs)
       - name: Remove Old Containers
         run: |
           # Remove any container whose name starts with "spring-boot-tdd-app-"
@@ -89,8 +77,9 @@ jobs:
             | grep -v "spring-boot-tdd-app-${{ github.run_id }}" \
             | awk '{print $1}' \
             | xargs -r docker rm -f
+          docker ps -a
 
-      # Step 13: Remove local Docker images (optional cleanup)
+      # Step 11: Remove local Docker images (optional cleanup)
       - name: Remove Local Docker Images
         run: |
           docker rmi spring-boot-tdd-app:latest || true
