@@ -183,26 +183,6 @@ mvn test
 
 ## Future Enhancements
 - Add Swagger UI for API documentation.
-- Implement a CI/CD pipeline using GitHub Actions or Jenkins.
-- Containerize the application using Docker.
-- Add more advanced String Calculator operations like subtraction or multiplication.
-
-## License
-This project is open-sourced under the [MIT license](https://opensource.org/licenses/MIT).
-#### 1. Run Unit and Integration Tests
-```bash
-mvn test
-```
-#### 2. Key Test Classes
-- `GreetTest`: Contains tests for the greeting API.
-- `GreetingRepositoryTest`: Contains tests for the database persistence logic.
-- `SpringBootTlddApplicationTests`: Main test class that loads the Spring context.
-- `GlobalExceptionHandlerTest`: Tests for global exception handling.
-- `StringCalculatorTest`: Contains step-by-step TDD tests for the String Calculator.
-
-## Future Enhancements
-- Add Swagger UI for API documentation.
-- Enhance the CI/CD pipeline for multi-environment deployment.
 - Implement Kubernetes deployment for container orchestration.
 - Add more advanced String Calculator operations like subtraction or multiplication.
 
